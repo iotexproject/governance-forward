@@ -50,9 +50,11 @@ interface GovernaceForwardInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
+    "Cancel(address)": EventFragment;
     "ForwardTo(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Cancel"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ForwardTo"): EventFragment;
 }
 
@@ -160,6 +162,8 @@ export class GovernaceForward extends BaseContract {
   };
 
   filters: {
+    Cancel(from?: string | null): TypedEventFilter<[string], { from: string }>;
+
     ForwardTo(
       from?: string | null,
       to?: string | null

@@ -8,6 +8,7 @@ contract GovernaceForward {
     EnumerableMap.AddressToAddressMap private _map;
 
     event ForwardTo(address indexed from, address indexed to );
+    event Cancel(address indexed from);
     
     function forwardTo(address to) public {
         _map.set(msg.sender, to);
@@ -16,6 +17,7 @@ contract GovernaceForward {
     
     function cancel() public {
         _map.remove(msg.sender);
+        emit Cancel(msg.sender);
     }
     
     function getVoterByAddress(address _addr) external view returns(address result) {
