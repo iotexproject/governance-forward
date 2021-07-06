@@ -3,13 +3,11 @@ pragma solidity ^0.6.0;
 import "./EnumerableMap.sol";
 
 contract GovernaceForward {
-    using EnumerableMap for EnumerableMap.UintToAddressMap;
+    using EnumerableMap for EnumerableMap.AddressToAddressMap;
 
-    EnumerableMap.UintToAddressMap private _map;
-
+    EnumerableMap.AddressToAddressMap private _map;
 
     event ForwardTo(address indexed from, address indexed to );
-    
     
     function forwardTo(address to) public {
         _map.set(msg.sender, to);
